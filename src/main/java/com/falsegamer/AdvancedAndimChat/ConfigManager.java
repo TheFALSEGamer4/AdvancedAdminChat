@@ -11,42 +11,45 @@ public class ConfigManager {
 
     private final Plugin plugin;
     private FileConfiguration config;
-    private final Map<String, String> messages = new HashMap<>();
+    public String prefix;
+    public String reloadMessage;
+    public String invalidMessage;
+    public String AOMessage;
 
     public ConfigManager(Plugin plugin) {
         this.plugin = plugin;
         plugin.saveDefaultConfig();
         this.config = plugin.getConfig();
-        reload();
-        reloadMessages();
+        this.reloadMessages();
     }
 
     public void reload() {
         plugin.saveResource("config.yml", false);
         plugin.reloadConfig();
         config = plugin.getConfig();
-        reloadMessages();
+        this.prefix = this.cc(this.config.getString("AdminOnly.Prefix"));
+        this.reloadMessage = this.cc(this.config.getString("AdminOnly.ReloadMessage"));
+        this.invalidMessage = this.cc(this.config.getString("AdminOnly.InvalidUsageMessage"));
+        this.AOMessage = this.cc(this.config.getString("AdminOnly.Message"));
+        this.reloadMessages();
     }
 
     public void reloadMessages() {
-        messages.clear();
-        ConfigurationSection messageSection = config.getConfigurationSection("AdminOnly.ReloadMessage");
-        if (messageSection == null)
-            return;
-        for (Map.Entry<String, Object> message : messageSection.getValues(false).entrySet()) {
-            try {
-                messages.put(message.getKey(), cc((String) message.getValue()));
-            } catch (ClassCastException e) {
-                e.printStackTrace();
-            }
-        }
+        plugin.saveResource("config.yml", false);
+        plugin.reloadConfig();
+        config = plugin.getConfig();
+        this.prefix = this.cc(this.config.getString("AdminOnly.Prefix"));
+        this.reloadMessage = this.cc(this.config.getString("AdminOnly.ReloadMessage"));
+        this.invalidMessage = this.cc(this.config.getString("AdminOnly.InvalidUsageMessage"));
+        this.AOMessage = this.cc(this.config.getString("AdminOnly.Message"));
     }
 
-    public String getMessage(String key) {
-        return messages.getOrDefault(key, "Unknown message '" + key + "'");
+
+    public String message(String message) {
+        return this.prefix + " " + this.cc(message);
     }
 
-    private String cc(String s) {
-        return ChatColor.translateAlternateColorCodes('&', s);
+    public String cc(String message) {
+        return ChatColor.translateAlternateColorCodes('&', message);
     }
 }
