@@ -24,7 +24,7 @@ public class Main extends JavaPlugin implements Listener {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.sendMessage(ChatColor.BLUE + "Advanced Admin Only");
-        console.sendMessage(ChatColor.BLUE + "Version 1.0");
+        console.sendMessage(ChatColor.BLUE + "Version 1.1");
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         this.getCommand("ao").setExecutor(new AOCommand(this));
         this.getCommand("aoreload").setExecutor(new reloadcmd(this));
@@ -43,7 +43,7 @@ public class Main extends JavaPlugin implements Listener {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.sendMessage(ChatColor.BLUE + "Advanced Admin Only");
-        console.sendMessage(ChatColor.BLUE + "Version 1.0");
+        console.sendMessage(ChatColor.BLUE + "Version 1.1");
         console.sendMessage(ChatColor.RED + "Disabled!");
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
