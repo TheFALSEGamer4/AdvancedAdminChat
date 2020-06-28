@@ -9,10 +9,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class AOCommand implements CommandExecutor {
-    public Main main;
-
-    public AOCommand(Main main) {
-        this.main = main;
+    private final Main plugin;
+    public AOCommand(Main plugin) {
+        this.plugin = plugin;
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -29,16 +28,14 @@ public class AOCommand implements CommandExecutor {
 
                 if (args.length > 0) {
                     message = StringUtils.join(args, ' ', 0, args.length);
-                    String ChatMessage = ChatColor.translateAlternateColorCodes('&', this.main.getConfig().getString("AdminOnly.MessageFormat.Message"));
+                    String ChatMessage = this.plugin.cm.AOMessage;
                     ChatMessage = ChatMessage.replaceAll("%player%", player.getName());
                     ChatMessage = ChatMessage.replaceAll("%message%", message);
                     ChatMessage = ChatMessage.replaceAll("%playerworld%", pworld);
-                    ChatColor.translateAlternateColorCodes('&', ChatMessage);
-                    Bukkit.broadcast(ChatMessage, "adminonly.chat");
+                    Bukkit.broadcast(this.plugin.cm.message(ChatMessage), "adminonly.chat");
                 } else {
-                    message = ChatColor.translateAlternateColorCodes('&', this.main.getConfig().getString("AdminOnly.InvalidUsageMessage.Message"));
-                    ChatColor.translateAlternateColorCodes('&', message);
-                    player.sendMessage(message);
+                    message = this.plugin.cm.invalidMessage;
+                    player.sendMessage(this.plugin.cm.message(message));
                 }
             } else {
                 player.sendMessage(ChatColor.DARK_RED + "You do not have permission to run this command!");
