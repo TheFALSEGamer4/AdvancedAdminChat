@@ -8,8 +8,6 @@ import org.bukkit.entity.Player;
 
 
 public class reloadcmd implements CommandExecutor {
-    public Main main;
-    private FileConfiguration config;
 
     private final Main plugin;
     public reloadcmd(Main plugin) {
@@ -19,8 +17,8 @@ public class reloadcmd implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         Player player = (Player) sender;
         if (cmd.getName().equalsIgnoreCase("aoreload")){
-            plugin.getConfigManager().reload();
-            sender.sendMessage(plugin.getConfigManager().getMessage("Message"));
+            this.plugin.cm.reload();
+            sender.sendMessage(this.plugin.cm.message(this.plugin.cm.reloadMessage));
         }
         return true;
     }
