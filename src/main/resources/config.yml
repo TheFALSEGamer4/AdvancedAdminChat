@@ -1,0 +1,11 @@
+#Basic Configuration For AdminOnly Plugin!
+AdminOnly:
+  InvalidUsageMessage:
+    Message: '&4You do not have access to this command!'
+  MessageFormat:
+    #The tag %player% represents the players username.
+    #The tag %message% represents the message that the player is sending. (I.E. '/ao <message>' in which <message> is the %message%)
+    #The tag &playerworld% is the world the player is currently in
+    Message: '&f[&d&lA&9&lO&f] &2%playerworld% &9%player%: &b%message%'
+  ReloadMessage:
+    Message: '&f[&d&lA&9&lO&f] &bConfig Reloaded'
