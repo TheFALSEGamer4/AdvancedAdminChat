@@ -11,9 +11,9 @@ I made this source available because I hate it when plugin makers/modifiers don'
 **Debian Based Distros**
 
 ```shell
-sudo apt-get install git
-git clone https://github.com/TheFALSEGamer4/AdvancedAdminChat.git
-cd AdvancedAdminChat/
+$ sudo apt-get install git
+$ git clone https://github.com/TheFALSEGamer4/AdvancedAdminChat.git
+$ cd AdvancedAdminChat/
 ```
 > Then once your done editing or just want to compile it, make sure your in the same directory as the pom.xml file and run
 ```shell
