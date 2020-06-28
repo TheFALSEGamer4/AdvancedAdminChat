@@ -13,6 +13,8 @@ public class Main extends JavaPlugin implements Listener {
     FileConfiguration config;
     File cfile;
     private ConfigManager configManager;
+    public reloadcmd rc = new reloadcmd(this);
+    public ConfigManager cm = new ConfigManager(this);
 
     @Override
     public void onEnable() {
