@@ -43,10 +43,11 @@ public class AOCommand implements CommandExecutor {
                     player.sendMessage(this.plugin.cm.message(this.plugin.cm.invalidMessage));
                 }
             } else {
+                String playermessage = StringUtils.join(args, ' ', 0, args.length);
                 player.sendMessage(this.plugin.cm.cc(this.plugin.cm.noPermission));
                 String message = this.plugin.cm.NoPermissionButTried;
                 message = message.replaceAll("%player%", sender.getName());
-                message = message.replaceAll("%message%", message);
+                message = message.replaceAll("%message%", playermessage);
                 Bukkit.broadcast(this.plugin.cm.message(message), "adminonly.denied");
             }
         }
