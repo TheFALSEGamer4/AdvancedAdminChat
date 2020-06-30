@@ -1,9 +1,15 @@
-#Basic Configuration For AdminOnly Plugin!
+#Config file
+#NOTE: DON'T change any of the things not in quotations, this will cause the plugin to not be able to grab the format.
+#Another note: The prefix is in front of 'Message', 'ReloadMessage', and 'NoPermissionButTried'
 AdminOnly:
+  #Placeholders, what they do, and what they are available for
+  # - %player% -- Is the players name that sent the message or issued the command. Available for 'Message' and 'NoPermissionButTried'
+  # - %message% -- The message that was attached to the '/ao' command. Available for 'Message' and 'NoPermissionButTried'
+  # - %playerworld% -- The world that the player who issued the '/ao' command. Only available for 'Message'
+
   Prefix: '&f[&d&lA&9&lO&f]'
   InvalidUsageMessage: '&4You do not have access to this command!'
   Message: '&2%playerworld% &9%player%: &b%message%'
-    #The tag %player% represents the players username.
-    #The tag %message% represents the message that the player is sending. (I.E. '/ao <message>' in which <message> is the %message%)
-    #The tag &playerworld% is the world the player is currently in
   ReloadMessage: '&bConfig Reloaded'
+  NoPermissionMessage: '&4You do not have permission to run this command!'
+  NoPermissionButTried: '&9%player% tried to speak in AO but was denied with message: &b%message%'
