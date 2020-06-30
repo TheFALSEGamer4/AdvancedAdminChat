@@ -1,20 +1,20 @@
 package com.falsegamer.AdvancedAdminChat;
 
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ConfigManager {
 
     private final Plugin plugin;
     private FileConfiguration config;
+
     public String prefix;
     public String reloadMessage;
     public String invalidMessage;
     public String AOMessage;
+    public String noPermission;
+    public String NoPermissionButTried;
 
     public ConfigManager(Plugin plugin) {
         this.plugin = plugin;
@@ -31,6 +31,9 @@ public class ConfigManager {
         this.reloadMessage = this.cc(this.config.getString("AdminOnly.ReloadMessage"));
         this.invalidMessage = this.cc(this.config.getString("AdminOnly.InvalidUsageMessage"));
         this.AOMessage = this.cc(this.config.getString("AdminOnly.Message"));
+        this.noPermission = this.cc(this.config.getString("AdminOnly.Message"));
+        this.NoPermissionButTried = this.cc(this.config.getString("AdminOnly.NoPermissionButTried"));
+
         this.reloadMessages();
     }
 
@@ -42,8 +45,9 @@ public class ConfigManager {
         this.reloadMessage = this.cc(this.config.getString("AdminOnly.ReloadMessage"));
         this.invalidMessage = this.cc(this.config.getString("AdminOnly.InvalidUsageMessage"));
         this.AOMessage = this.cc(this.config.getString("AdminOnly.Message"));
+        this.noPermission = this.cc(this.config.getString("AdminOnly.NoPermissionMessage"));
+        this.NoPermissionButTried = this.cc(this.config.getString("AdminOnly.NoPermissionButTried"));
     }
-
 
     public String message(String message) {
         return this.prefix + " " + this.cc(message);
