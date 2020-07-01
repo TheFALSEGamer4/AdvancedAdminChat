@@ -10,11 +10,13 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
+
     FileConfiguration config;
     File cfile;
     private ConfigManager configManager;
     public reloadcmd rc = new reloadcmd(this);
     public ConfigManager cm = new ConfigManager(this);
+    public parserClass pc = new parserClass(this);
 
     @Override
     public void onEnable() {
@@ -24,7 +26,7 @@ public class Main extends JavaPlugin implements Listener {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.sendMessage(ChatColor.BLUE + "Advanced Admin Only");
-        console.sendMessage(ChatColor.BLUE + "Version 1.1");
+        console.sendMessage(ChatColor.BLUE + "Version 1.0");
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         this.getCommand("ao").setExecutor(new AOCommand(this));
         this.getCommand("aoreload").setExecutor(new reloadcmd(this));
@@ -33,17 +35,16 @@ public class Main extends JavaPlugin implements Listener {
         this.saveConfig();
         this.cfile = new File(this.getDataFolder(), "config.yml");
     }
+
     public ConfigManager getConfigManager() {
         return configManager;
     }
-
-
 
     public void onDisable() {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.sendMessage(ChatColor.BLUE + "Advanced Admin Only");
-        console.sendMessage(ChatColor.BLUE + "Version 1.1");
+        console.sendMessage(ChatColor.BLUE + "Version 1.0");
         console.sendMessage(ChatColor.RED + "Disabled!");
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
