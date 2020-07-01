@@ -23,11 +23,8 @@ public class AOCommand implements CommandExecutor {
             if (player.hasPermission("adminonly.chat")) {
 
                 String message;
-                String pworld= player.getWorld().toString();
-                int pw1 = pworld.indexOf('=')+1;
-                int pw2 = pworld.indexOf('}');
-                pworld = pworld.substring(pw1, pw2);
-                pworld = pworld.substring(0, 1).toUpperCase() + pworld.substring(1);
+                String pworld = this.plugin.pc.worldParser(player.getWorld().toString());
+
 
                 if (args.length > 0) {
 
@@ -53,4 +50,7 @@ public class AOCommand implements CommandExecutor {
         }
         return true;
     }
+
+
+
 }
