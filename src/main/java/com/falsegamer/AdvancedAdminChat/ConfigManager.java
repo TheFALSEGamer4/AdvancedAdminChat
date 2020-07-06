@@ -1,16 +1,14 @@
 package com.falsegamer.AdvancedAdminChat;
 
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ConfigManager {
 
     private final Plugin plugin;
     private FileConfiguration config;
+
     public String prefix;
     public String reloadMessage;
     public String invalidMessage;
