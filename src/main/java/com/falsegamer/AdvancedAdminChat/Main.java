@@ -27,6 +27,7 @@ public class Main extends JavaPlugin implements Listener {
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.sendMessage(ChatColor.BLUE + "Advanced Admin Only");
         console.sendMessage(ChatColor.BLUE + "Version 1.0");
+        console.sendMessage(ChatColor.GREEN + "Enabled Yay!!");
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         this.getCommand("ao").setExecutor(new AOCommand(this));
         this.getCommand("aoreload").setExecutor(new reloadcmd(this));

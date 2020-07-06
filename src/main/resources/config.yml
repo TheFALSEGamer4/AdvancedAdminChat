@@ -8,7 +8,6 @@
 # %playerworld%: The world that the player who issued the '/ao' command. Only available for 'Message'
 AdminOnly:
 
-
   Prefix: '&f[&d&lA&9&lO&f]'
   InvalidUsageMessage: '&4You do not have access to this command!'
   Message: '&2%playerworld% &9%player%: &b%message%'
