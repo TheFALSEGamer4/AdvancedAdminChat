@@ -20,7 +20,7 @@ public class ConfigManager {
         this.plugin = plugin;
         plugin.saveDefaultConfig();
         this.config = plugin.getConfig();
-        this.reloadMessages();
+        this.reload();
     }
 
     public void reload() {
@@ -34,19 +34,6 @@ public class ConfigManager {
         this.noPermission = this.cc(this.config.getString("AdminOnly.Message"));
         this.NoPermissionButTried = this.cc(this.config.getString("AdminOnly.NoPermissionButTried"));
 
-        this.reloadMessages();
-    }
-
-    public void reloadMessages() {
-        plugin.saveResource("config.yml", false);
-        plugin.reloadConfig();
-        config = plugin.getConfig();
-        this.prefix = this.cc(this.config.getString("AdminOnly.Prefix"));
-        this.reloadMessage = this.cc(this.config.getString("AdminOnly.ReloadMessage"));
-        this.invalidMessage = this.cc(this.config.getString("AdminOnly.InvalidUsageMessage"));
-        this.AOMessage = this.cc(this.config.getString("AdminOnly.Message"));
-        this.noPermission = this.cc(this.config.getString("AdminOnly.NoPermissionMessage"));
-        this.NoPermissionButTried = this.cc(this.config.getString("AdminOnly.NoPermissionButTried"));
     }
 
     public String message(String message) {
