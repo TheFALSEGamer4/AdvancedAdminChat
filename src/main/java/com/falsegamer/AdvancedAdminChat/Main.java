@@ -1,7 +1,5 @@
 package com.falsegamer.AdvancedAdminChat;
 
-import java.io.File;
-import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,21 +11,19 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import java.util.logging.Logger;
 
 public class Main extends JavaPlugin implements Listener {
 
     FileConfiguration config;
-    File cfile;
-    private ConfigManager configManager;
     public reloadcmd rc = new reloadcmd(this);
     public ConfigManager cm = new ConfigManager(this);
     public parserClass pc = new parserClass(this);
 
-    public String updateAvailable = "false";
+    public String updateAvailable;
 
     @Override
     public void onEnable() {
-        configManager = new ConfigManager(this);
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.sendMessage(ChatColor.BLUE + "Advanced Admin Only");
@@ -39,7 +35,6 @@ public class Main extends JavaPlugin implements Listener {
         this.config = this.getConfig();
         this.config.options().copyDefaults(true);
         this.saveConfig();
-        this.cfile = new File(this.getDataFolder(), "config.yml");
 
         Logger logger = this.getLogger();
         getServer().getPluginManager().registerEvents(this, this);
@@ -55,11 +50,10 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onLogin(PlayerJoinEvent event) {
-
+    public void onLogin(PlayerJoinEvent event){
         Player p = event.getPlayer();
-        if (p.hasPermission("adminonly.notify")) {
-            if (updateAvailable.equals("true")) {
+        if(p.hasPermission("adminonly.notify")){
+            if(updateAvailable.equals("true")){
                 p.sendMessage(this.cm.message("&2Update found, go download it at https://www.spigotmc.org/resources/advancedadminchat.81160/"));
             }
         }
