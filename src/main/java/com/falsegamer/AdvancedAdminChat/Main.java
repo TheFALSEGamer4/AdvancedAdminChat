@@ -11,6 +11,13 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Consumer;
+
+import javax.net.ssl.HttpsURLConnection;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.logging.Logger;
 
 public class Main extends JavaPlugin implements Listener {
@@ -21,6 +28,8 @@ public class Main extends JavaPlugin implements Listener {
     public parserClass pc = new parserClass(this);
 
     public String updateAvailable;
+    public String currentVersion;
+    public String newVersion;
 
     @Override
     public void onEnable() {
@@ -31,22 +40,34 @@ public class Main extends JavaPlugin implements Listener {
         console.sendMessage(ChatColor.GREEN + "Enabled Yay!!");
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         this.getCommand("ao").setExecutor(new AOCommand(this));
-        this.getCommand("aoreload").setExecutor(new reloadcmd(this));
+        this.getCommand("aoreload").setExecutor(rc);
         this.config = this.getConfig();
         this.config.options().copyDefaults(true);
         this.saveConfig();
+        HttpsURLConnection connection = null;
+        try {
+            connection = (HttpsURLConnection) new URL("https://api.spigotmc.org/legacy/update.php?resource=81160").openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        try {
+            newVersion = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Logger logger = this.getLogger();
         getServer().getPluginManager().registerEvents(this, this);
-        new UpdateChecker(this, 81160).getVersion(version -> {
-            if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
-                logger.info("There is not a new update available.");
-                updateAvailable = "false";
-            } else {
-                logger.info("There is a new update available.");
-                updateAvailable = "true";
-            }
-        });
+        currentVersion = this.getDescription().getVersion();
+
+
+        if (currentVersion.equalsIgnoreCase(String.valueOf(newVersion))) {
+            logger.info("There is not a new update available. ");
+            updateAvailable = "false";
+        } else {
+            logger.info("There is a new update available. Current version: " + currentVersion + ", new version: " + newVersion);
+            updateAvailable = "true";
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -54,7 +75,11 @@ public class Main extends JavaPlugin implements Listener {
         Player p = event.getPlayer();
         if(p.hasPermission("adminonly.notify")){
             if(updateAvailable.equals("true")){
-                p.sendMessage(this.cm.message("&2Update found, go download it at https://www.spigotmc.org/resources/advancedadminchat.81160/"));
+                String message = this.cm.updateAvailableMessage;
+                message = message.replaceAll("%currentversion%", currentVersion);
+                message = message.replaceAll("%newversion%", newVersion);
+                message = message.replaceAll("%downloadurl%", "https://www.spigotmc.org/resources/advancedadminchat.81160/");
+                p.sendMessage(this.cm.message(message));
             }
         }
     }

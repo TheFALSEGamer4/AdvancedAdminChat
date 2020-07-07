@@ -12,7 +12,7 @@
 
     <name>AdvancedAdminChat</name>
 
-    <inceptionYear>2015</inceptionYear>
+    <inceptionYear>2020</inceptionYear>
 
     <scm>
         <connection>scm:git:https://github.com/TealCube/bukkit-plugin-archetype.git</connection>
