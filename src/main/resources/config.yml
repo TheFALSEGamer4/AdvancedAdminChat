@@ -6,6 +6,9 @@
 # %player%: Is the players name that sent the message or issued the command. Available for 'Message' and 'NoPermissionButTried'
 # %message%: The message that was attached to the '/ao' command. Available for 'Message' and 'NoPermissionButTried'
 # %playerworld%: The world that the player who issued the '/ao' command. Only available for 'Message'
+# %currentversion%: The current plugin version. Only available for 'UpdateAvailableJoinMessage'
+# %newversion%: The plugin version that is available on the spigot website. Only available for 'UpdateAvailableJoinMessage'
+# %downloadurl%: The download link to the plugin on spigotmcs' website. Only available for 'UpdateAvailableJoinMessage'
 AdminOnly:
 
   Prefix: '&f[&d&lA&9&lO&f]'
@@ -14,3 +17,4 @@ AdminOnly:
   ReloadMessage: '&bConfig Reloaded'
   NoPermissionMessage: '&4You do not have permission to run this command!'
   NoPermissionButTried: '&9%player% tried to speak in AO but was denied with message: &b%message%'
+  UpdateAvailableJoinMessage: '&2Update available. Current Version: &2&l[&2%currentversion%&2&l]&2. New Version: &2&l[&2%newversion%&2&l]&2. Download at: %downloadurl%'

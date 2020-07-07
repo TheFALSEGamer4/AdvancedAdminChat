@@ -15,6 +15,7 @@ public class ConfigManager {
     public String AOMessage;
     public String noPermission;
     public String NoPermissionButTried;
+    public String updateAvailableMessage;
 
     public ConfigManager(Plugin plugin) {
         this.plugin = plugin;
@@ -33,6 +34,7 @@ public class ConfigManager {
         this.AOMessage = this.cc(this.config.getString("AdminOnly.Message"));
         this.noPermission = this.cc(this.config.getString("AdminOnly.Message"));
         this.NoPermissionButTried = this.cc(this.config.getString("AdminOnly.NoPermissionButTried"));
+        this.updateAvailableMessage = this.cc(this.config.getString("AdminOnly.UpdateAvailableJoinMessage"));
 
     }
 
