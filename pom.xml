@@ -5,7 +5,9 @@
 
     <groupId>com.falsegamer</groupId>
     <artifactId>AdvancedAdminChat</artifactId>
+
     <version>1.5</version>
+
     <packaging>jar</packaging>
 
     <name>AdvancedAdminChat</name>
