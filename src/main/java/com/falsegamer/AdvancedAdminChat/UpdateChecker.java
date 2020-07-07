@@ -3,7 +3,6 @@ package com.falsegamer.AdvancedAdminChat;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Consumer;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -11,8 +10,8 @@ import java.util.Scanner;
 
 public class UpdateChecker {
 
-    private Plugin plugin;
-    private int resourceId;
+    private final Plugin plugin;
+    private final int resourceId;
 
     public UpdateChecker(Plugin plugin, int resourceId) {
         this.plugin = plugin;
@@ -31,3 +30,4 @@ public class UpdateChecker {
         });
     }
 }
+

@@ -1,7 +1,5 @@
 package com.falsegamer.AdvancedAdminChat;
 
-import java.io.File;
-import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,26 +10,24 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import java.util.logging.Logger;
 
 public class Main extends JavaPlugin implements Listener {
 
     FileConfiguration config;
-    File cfile;
-    private ConfigManager configManager;
     public reloadcmd rc = new reloadcmd(this);
     public ConfigManager cm = new ConfigManager(this);
     public parserClass pc = new parserClass(this);
 
     public String updateAvailable;
+
     @Override
     public void onEnable() {
-        configManager = new ConfigManager(this);
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.sendMessage(ChatColor.BLUE + "Advanced Admin Only");
-        console.sendMessage(ChatColor.BLUE + "Version 1.0");
+        console.sendMessage(ChatColor.BLUE + "Version 1.5");
         console.sendMessage(ChatColor.GREEN + "Enabled Yay!!");
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         this.getCommand("ao").setExecutor(new AOCommand(this));
@@ -39,10 +35,9 @@ public class Main extends JavaPlugin implements Listener {
         this.config = this.getConfig();
         this.config.options().copyDefaults(true);
         this.saveConfig();
-        this.cfile = new File(this.getDataFolder(), "config.yml");
-        getServer().getPluginManager().registerEvents(this, this);
 
         Logger logger = this.getLogger();
+        getServer().getPluginManager().registerEvents(this, this);
         new UpdateChecker(this, 81160).getVersion(version -> {
             if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
                 logger.info("There is not a new update available.");
@@ -53,10 +48,9 @@ public class Main extends JavaPlugin implements Listener {
             }
         });
     }
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onLogin(PlayerJoinEvent event)
-    {
 
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onLogin(PlayerJoinEvent event){
         Player p = event.getPlayer();
         if(p.hasPermission("adminonly.notify")){
             if(updateAvailable.equals("true")){
@@ -70,7 +64,7 @@ public class Main extends JavaPlugin implements Listener {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.sendMessage(ChatColor.BLUE + "Advanced Admin Only");
-        console.sendMessage(ChatColor.BLUE + "Version 1.0");
+        console.sendMessage(ChatColor.BLUE + "Version 1.5");
         console.sendMessage(ChatColor.RED + "Disabled!");
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
