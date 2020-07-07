@@ -28,8 +28,6 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         configManager = new ConfigManager(this);
-        PluginManager pm = Bukkit.getServer().getPluginManager();
-        pm.registerEvents(this, this);
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.sendMessage(ChatColor.BLUE + "Advanced Admin Only");
@@ -60,7 +58,7 @@ public class Main extends JavaPlugin implements Listener {
     {
 
         Player p = event.getPlayer();
-        if(p.hasPermission("spy.notify")){
+        if(p.hasPermission("adminonly.notify")){
             if(updateAvailable.equals("true")){
                 p.sendMessage(this.cm.message("&2Update found, go download it at https://www.spigotmc.org/resources/advancedadminchat.81160/"));
             }
