@@ -1,6 +1,8 @@
 package com.falsegamer.AdvancedAdminChat;
 
 import java.io.File;
+import java.util.logging.Logger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
@@ -35,6 +37,15 @@ public class Main extends JavaPlugin implements Listener {
         this.config.options().copyDefaults(true);
         this.saveConfig();
         this.cfile = new File(this.getDataFolder(), "config.yml");
+        Logger logger = this.getLogger();
+
+        new UpdateChecker(this, 81160).getVersion(version -> {
+            if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
+                logger.info("There is not a new update available.");
+            } else {
+                logger.info("There is a new update available.");
+            }
+        });
     }
 
     public ConfigManager getConfigManager() {
