@@ -7,7 +7,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,11 +24,10 @@ public class Main extends JavaPlugin implements Listener {
     public ConfigManager cm = new ConfigManager(this);
     public parserClass pc = new parserClass(this);
 
+    public String updateAvailable;
     @Override
     public void onEnable() {
         configManager = new ConfigManager(this);
-        PluginManager pm = Bukkit.getServer().getPluginManager();
-        pm.registerEvents(this, this);
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         console.sendMessage(ChatColor.DARK_GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         console.sendMessage(ChatColor.BLUE + "Advanced Admin Only");
@@ -37,20 +40,31 @@ public class Main extends JavaPlugin implements Listener {
         this.config.options().copyDefaults(true);
         this.saveConfig();
         this.cfile = new File(this.getDataFolder(), "config.yml");
-        Logger logger = this.getLogger();
+        getServer().getPluginManager().registerEvents(this, this);
 
+        Logger logger = this.getLogger();
         new UpdateChecker(this, 81160).getVersion(version -> {
             if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
                 logger.info("There is not a new update available.");
+                updateAvailable = "false";
             } else {
                 logger.info("There is a new update available.");
+                updateAvailable = "true";
             }
         });
     }
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onLogin(PlayerJoinEvent event)
+    {
 
-    public ConfigManager getConfigManager() {
-        return configManager;
+        Player p = event.getPlayer();
+        if(p.hasPermission("adminonly.notify")){
+            if(updateAvailable.equals("true")){
+                p.sendMessage(this.cm.message("&2Update found, go download it at https://www.spigotmc.org/resources/advancedadminchat.81160/"));
+            }
+        }
     }
+
 
     public void onDisable() {
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
